@@ -57,4 +57,6 @@ for (const [routeName, routeController] of Object.entries(routes)) {
 	}
 }
 
+app.use('/api/permisoAcceso', routes.permisoAcceso);
+
 module.exports = app;
