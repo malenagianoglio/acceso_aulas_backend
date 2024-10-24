@@ -57,6 +57,8 @@ for (const [routeName, routeController] of Object.entries(routes)) {
 	}
 }
 
-app.use('/api/permisoAcceso', routes.permisoAcceso);
+app.post('/api/permisoAcceso', 
+	makeHandlerAwareOfAsyncErrors(routes.permisoAcceso.checkAccess)
+);
 
 module.exports = app;

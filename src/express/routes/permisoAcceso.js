@@ -60,6 +60,7 @@ async function checkAccess(req, res) {
             return res.status(404).json({ access: false, message: 'Usuario no encontrado' });
         }
 
+        // Verifica el permiso en la tabla permisoAcceso
         const permiso = await models.permisoAcceso.findOne({
             where: {
                 espacio_id: espacio.id,
