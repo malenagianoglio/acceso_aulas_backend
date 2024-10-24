@@ -22,18 +22,8 @@ async function init() {
     console.log(`Starting Sequelize + Express example on port ${PORT}...`);
 
     app.listen(PORT, () => {
-        console.log(`Express server started on port ${PORT}. Try some routes, such as '/api/users'.`);
+        console.log(`Express server started on port ${PORT}.`);
     });
-
-    const queryData = async () => {
-        const User = sequelize.models.usuario;
-        try {
-            const users = await User.findAll();
-            console.log(users);
-        } catch (error) {
-            console.error('Error fetching users:', error);
-        }
-    }
 }
 
 init();

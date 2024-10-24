@@ -32,7 +32,7 @@ module.exports = (Sequelize) => {
         uid: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true, // Asegurarse de que el UID sea único
+            unique: true, 
         },
     });
 }

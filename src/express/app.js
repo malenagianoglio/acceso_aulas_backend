@@ -1,11 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors'); 
 
 const routes = {
-	usuarios: require('./routes/usuarios')
+	usuarios: require('./routes/usuarios'),
+	espacios: require('./routes/espacios'),
+	permisoAcceso: require('./routes/permisoAcceso'),
 };
 
 const app = express();
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

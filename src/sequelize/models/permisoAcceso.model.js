@@ -11,11 +11,26 @@ module.exports = (Sequelize) => {
             type: DataTypes.DATE,
             allowNull: false,
             defaultValue: DataTypes.NOW,
-
         },
         fecha_fin: {
             type: DataTypes.DATE,
             allowNull: true,
-        }
+        },
+        usuarioId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'usuario', 
+                key: 'id',
+            },
+        },
+        espacioId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'espacio', 
+                key: 'id',
+            },
+        },
     });
-}
+};

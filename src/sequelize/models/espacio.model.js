@@ -11,8 +11,13 @@ module.exports = (Sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        piso: {
+        sector: {
             type: DataTypes.ENUM('primer nivel', 'segundo nivel', 'tercer nivel', 'cuarto nivel', 'laboratorio', 'biblioteca', 'cantina'),
+            allowNull: false,
+        },
+        id_esp8266: {
+            type: DataTypes.STRING,
+            unique: true,
             allowNull: false,
         }
     });
