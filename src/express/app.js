@@ -6,6 +6,7 @@ const routes = {
 	usuarios: require('./routes/usuarios'),
 	espacios: require('./routes/espacios'),
 	permisoAcceso: require('./routes/permisoAcceso'),
+	comprobarAcceso: require('./routes/comprobarAcceso')
 };
 
 const app = express();
@@ -57,8 +58,12 @@ for (const [routeName, routeController] of Object.entries(routes)) {
 	}
 }
 
-app.post('/api/permisoAcceso', 
-	makeHandlerAwareOfAsyncErrors(routes.permisoAcceso.checkAccess)
+app.post('/api/comprobarAcceso', 
+	makeHandlerAwareOfAsyncErrors(routes.comprobarAcceso.checkAccess)
 );
+
+app.get('/api/buscarPermisos',
+	makeHandlerAwareOfAsyncErrors(routes.permisoAcceso.buscarPermisos)
+)
 
 module.exports = app;

@@ -4,12 +4,27 @@ const { getIdParam } = require('../helpers');
 async function getAll(req, res) {
     try {
         const permisos = await models.permisoAcceso.findAll();
-        res.status(200).json(permisos);
+        const usuarios = await models.usuario.findAll();
+        const espacios = await models.espacio.findAll();
+
+        const permisosConDatos = permisos.map(permiso => {
+            const usuario = usuarios.find(u => u.id === permiso.usuarioId);
+            const espacio = espacios.find(e => e.id === permiso.espacioId);
+
+            return {
+                permisos,
+                usuarios,
+                espacios
+            };
+        });
+
+        res.status(200).json(permisosConDatos);
     } catch (error) {
-        console.error('Error fetching users:', error);
-        res.status(500).send('Error fetching users');
+        console.error('Error fetching permissions:', error);
+        res.status(500).send('Error fetching permissions');
     }
 }
+
 
 async function getById(req, res) {
     const id = getIdParam(req);
@@ -40,49 +55,8 @@ async function create(req, res) {
     }
 }
 
-async function checkAccess(req, res) {
-    const { espID, uid } = req.body; 
-
-    try {
-        const espacio = await models.espacios.findOne({
-            where: { id_esp8266: espID } 
-        });
-
-        if (!espacio) {
-            return res.status(404).json({ message: 'Espacio no encontrado' });
-        }
-
-        const usuario = await models.usuarios.findOne({
-            where: { uid: uid } 
-        });
-
-        if (!usuario) {
-            return res.status(404).json({ access: false, message: 'Usuario no encontrado' });
-        }
-
-        // Verifica el permiso en la tabla permisoAcceso
-        const permiso = await models.permisoAcceso.findOne({
-            where: {
-                espacio_id: espacio.id,
-                usuario_id: usuario.id
-            }
-        });
-
-        if (permiso) {
-            return res.status(200).json({ access: true });
-        } else {
-            return res.status(403).json({ access: false, message: 'Acceso denegado' });
-        }
-    } catch (error) {
-        console.error('Error al verificar el acceso:', error);
-        return res.status(500).send('Error al verificar el acceso');
-    }
-}
-
-
 module.exports = {
     getAll,
     getById,
     create,
-    checkAccess,
 };

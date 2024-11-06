@@ -21,9 +21,10 @@ async function init() {
 
     console.log(`Starting Sequelize + Express example on port ${PORT}...`);
 
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
         console.log(`Express server started on port ${PORT}.`);
     });
+    
 }
 
 init();
