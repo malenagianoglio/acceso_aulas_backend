@@ -1,12 +1,12 @@
 function applyExtraSetup(sequelize) {
-	const { usuario, espacio, permisoAcceso, eventoEspacio } = sequelize.models;
+	const { usuario, espacio, permisoAcceso, historialAcceso } = sequelize.models;
 
     usuario.belongsToMany(espacio, { through: 'permisoAcceso' });
     espacio.belongsToMany(usuario, { through: 'permisoAcceso' });
-    espacio.hasMany(eventoEspacio);
-    eventoEspacio.belongsTo(espacio);
-    usuario.hasMany(eventoEspacio);
-    eventoEspacio.belongsTo(usuario);
+    usuario.hasMany(historialAcceso, { foreignKey: 'usuarioId' });
+    historialAcceso.belongsTo(usuario, { foreignKey: 'usuarioId' });
+    espacio.hasMany(historialAcceso, { foreignKey: 'espacioId' });
+    historialAcceso.belongsTo(espacio, { foreignKey: 'espacioId' });
 }
 
 module.exports = { applyExtraSetup };

@@ -6,7 +6,8 @@ const routes = {
 	usuarios: require('./routes/usuarios'),
 	espacios: require('./routes/espacios'),
 	permisoAcceso: require('./routes/permisoAcceso'),
-	comprobarAcceso: require('./routes/comprobarAcceso')
+	comprobarAcceso: require('./routes/comprobarAcceso'),
+	historialAcceso: require('./routes/historialAcceso')
 };
 
 const app = express();

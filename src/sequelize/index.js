@@ -8,13 +8,14 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     port: process.env.DB_PORT,
     logQueryParameters: true,
     benchmark: true,
+    timezone: '-03:00',
 });
 
 const modelDefiners = [
 	require('./models/usuario.model'),
     require('./models/espacio.model'),
-    require('./models/eventoEspacio.model'),
-    require('./models/permisoAcceso.model')
+    require('./models/permisoAcceso.model'),
+    require('./models/historialAcceso.model')
 ];
 
 for (const modelDefiner of modelDefiners) {
